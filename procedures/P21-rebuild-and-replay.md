@@ -12,7 +12,7 @@ Prove that the dataset is exactly what the archived batches say, so nothing depe
 4. Fix any difference at its source (a missing batch, a hand-edited record) and repeat.
 
 ## When to run
-After a tooling change that touches parsing, after a vocabulary rename, and once before you call the analysis finished. The first run verified a byte-identical rebuild once mid-way; later batches were not re-verified, so re-run it.
+After a tooling change that touches parsing, after a vocabulary rename, and once before you call the analysis finished. The first run verified a byte-identical rebuild once mid-way, and again at the end: bootstrap of both corpora, `classes-build`, `backfill-docs` and a replay of 76 archived batches reproduced all 3,249 records with an empty `diff -rq` (the replay takes about a minute). Re-run it after any tooling change, not only at the end.
 
 ## Rules
 - Never edit a record file by hand. Anything that is not in a batch (or in `bootstrap`/`backfill-docs`) does not survive a replay.
