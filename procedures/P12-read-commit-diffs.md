@@ -3,12 +3,15 @@
 **Effort:** L · **Needs:** P11 · **Opt out when:** you only need the landscape or issue-level knowledge
 
 ## Status of this procedure
-Exercised **once, on a small selection**: seven commits of the second corpus that fixed issues already recorded (a queue limit, an mtime check, a context type, a blob check, a one-character loop bound, a list-reload guard, a systemd unit line). Each took one command (`git show --stat` plus the +/- lines of the relevant files) and a few sentences. The rest of both corpora stayed at subject level.
+Exercised on **82 commits** in the first run: the 75 that carried a constraint tag or a key constraint cause (61 in the first corpus, 14 in the second) plus seven second-corpus commits tied to issues recorded earlier. All other commits (about 2,200) stayed at subject level. Reading the 75 took about ten rounds of 8-16 diffs each (one `git show` helper call per round, one batch per one or two rounds).
 
-What the small run showed:
-- Diffs **refine** claims rather than contradict them: the reload guard keeps the in-memory list only for files that cannot be *opened* (a comment explains that a backup copy would double RAM on small devices), which is narrower than "keeps the last good list"; the queue-limit fix degrades to *no reassembly* by cancelling it.
-- Small diffs (1-50 changed lines) are cheap to read and prove the mechanism; large ones need a targeted look at the hunks around the named function.
-- Selecting by "commit fixes an issue I already recorded" is efficient because you know exactly what to look for.
+What it showed:
+- Diffs **refine** claims rather than contradict them: a reload guard keeps the in-memory list only for files that cannot be *opened* (a comment says a backup copy would double RAM on small devices), narrower than "keeps the last good list"; a queue-limit fix degrades to *no reassembly*; a timestamp-fooling fix explains the exact bug (an option area lengthened even without a timestamp).
+- **Code comments carry the reasons.** Several enforcement points state the mechanism the issues only hinted at: the server-side race behind "seqovl only on the first part", the ICMP reason a low TTL cannot be used in a conntrack workaround, why a mark filter is mandatory (ordering and deadlock).
+- Small diffs (1-50 changed lines) are cheap and prove the mechanism; large ones (200+ lines: new facilities) need only the stat and the subject, and are recorded as "a large change adding X" without claiming details.
+- Selecting by tag ("commit carries a `constraint:*` tag or key cause") plus "commit fixes an issue I already recorded" is efficient because you know what to look for.
+
+The helper used (not part of the reference implementation; it is twenty lines): for each hash print `git show --stat` and the changed lines of the diff with `-U0`, blank and brace-only lines dropped, capped per commit.
 
 ## Purpose
 Establish what a change really did, verify a maintainer's explanation against code, and find design decisions that no issue explains.

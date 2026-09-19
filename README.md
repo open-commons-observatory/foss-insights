@@ -59,6 +59,6 @@ The result is not a report. It is a **dataset** (one file per issue/commit, cont
 
 ## What the first run produced (scale reference)
 
-- Corpus 1: 830 issues (770 read in full, 60 also checked against source) and 974 commits at subject level. Corpus 2: 115 issues/PRs (96 full, 19 source) and 1,330 commits (7 diffs read).
-- 60 problem classes; a constraints catalogue of about 125 rules with a status against the successor (carried 36, changed 23, superseded 8, not applicable 10, unverified 5).
+- Corpus 1: 830 issues (770 read in full, 60 also checked against source) and 974 commits at subject level. Corpus 2: 115 issues/PRs (96 full, 19 source) and 1,330 commits. Diffs were read for 82 constraint-related commits (59 in the first corpus, 21 in the second).
+- 60 problem classes; a constraints catalogue of about 125 rules with a status against the successor (carried 37, changed 25, superseded 9, not applicable 10, unverified 1).
 - Effort: many long sessions. Reading depth was the driver, not tooling: the first corpus took roughly 45 batches of 12-36 items; the second, the same structure at a fifth of the size, was done in a fraction of the time thanks to the API-only fetcher, `pz.py check` and `rulegen.py`.
