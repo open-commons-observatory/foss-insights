@@ -1,0 +1,5 @@
+# batch NNNN: <items a..b> (<date>), read in full. Rule/notes for the reader of the archive go in comment lines like this.
+i101 | - | kind:question outcome:docs-answer conf:stated depth=full | One or two sentences in your own words.
+i102,i117 | X2 | kind:bug cause:config-error outcome:fixed conf:stated depth=full | Two reports of the same failure; fixed in 2.3.
+i102 | - | depth=full | + Deep read: the maintainer states the mechanism (the limit is per connection, not per request).
+c66fda2c | - | ctype:fix engine:main | Fixes the off-by-one in the option parser.

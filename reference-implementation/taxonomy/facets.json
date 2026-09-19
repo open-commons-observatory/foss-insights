@@ -1,0 +1,112 @@
+{
+ "_doc": "Controlled vocabulary. A tag is facet:value. Multi-valued facets may repeat. This is a STARTER: keep the structure, replace the domain facets (layer, cause, engine) and add your own (see procedures/P05-design-the-taxonomy.md).",
+ "facets": {
+  "kind": {
+   "multi": false,
+   "doc": "What the issue is",
+   "values": {
+    "bug": "defect in the project",
+    "regression": "used to work, broke after a change",
+    "feature-request": "asks for new behaviour",
+    "question": "asks how something works",
+    "support": "install/usage help",
+    "docs": "documentation gap or typo",
+    "security": "security or trust report",
+    "meta": "about the project itself",
+    "spam": "noise, off-topic, empty"
+   }
+  },
+  "ctype": {
+   "multi": false,
+   "doc": "What a commit is",
+   "values": {
+    "feature": "new behaviour",
+    "fix": "bug fix",
+    "docs": "documentation only",
+    "build": "build, CI, packaging",
+    "maintenance": "merges, version bumps, cleanups",
+    "refactor": "no behaviour change",
+    "test": "tests only",
+    "release": "release preparation"
+   }
+  },
+  "layer": {
+   "multi": true,
+   "doc": "Where in the system the problem sits (REPLACE with your project's real layers, see P05)",
+   "values": {
+    "unknown": "not established",
+    "core": "main logic",
+    "docs": "documentation",
+    "build": "build/packaging",
+    "ops": "installation, service, configuration"
+   }
+  },
+  "cause": {
+   "multi": true,
+   "doc": "Root cause (use unknown when not established; grow this list from what you actually see)",
+   "values": {
+    "unknown": "not established",
+    "config-error": "user configuration",
+    "compat": "platform or version incompatibility",
+    "regression": "a change broke it",
+    "doc-gap": "documentation missing or misleading"
+   }
+  },
+  "engine": {
+   "multi": true,
+   "doc": "Component (REPLACE with your project's components)",
+   "values": {
+    "unknown": "not established",
+    "main": "the main program",
+    "docs": "documentation",
+    "ci": "CI/build scripts"
+   }
+  },
+  "os": {
+   "multi": true,
+   "doc": "Platform",
+   "values": {
+    "any": "all",
+    "linux": "",
+    "windows": "",
+    "macos": "",
+    "bsd": "",
+    "android": ""
+   }
+  },
+  "impact": {
+   "multi": true,
+   "doc": "Effect",
+   "values": {
+    "crash": "process or system dies",
+    "perf": "slow or resource hungry",
+    "breaks-feature": "a feature stops working",
+    "install-blocked": "cannot install or start",
+    "data-loss": "loses or corrupts data"
+   }
+  },
+  "outcome": {
+   "multi": false,
+   "doc": "How it ended",
+   "values": {
+    "fixed": "fixed in the project",
+    "workaround": "a workaround was given",
+    "wontfix": "declined",
+    "not-a-bug": "working as designed",
+    "docs-answer": "answered from existing docs",
+    "duplicate": "duplicate of another",
+    "open": "still open",
+    "unknown": "no resolution visible"
+   }
+  },
+  "conf": {
+   "multi": false,
+   "doc": "Confidence of the root cause",
+   "values": {
+    "stated": "maintainer said",
+    "reported": "reporter said",
+    "inferred": "my reading"
+   }
+  }
+ }
+}

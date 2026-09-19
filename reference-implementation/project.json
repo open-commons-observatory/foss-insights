@@ -1,0 +1,8 @@
+{
+ "owner": "OWNER",
+ "primary": "REPO",
+ "secondary": "REPO2",
+ "maintainers": [
+  "OWNER"
+ ]
+}
