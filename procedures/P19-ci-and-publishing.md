@@ -12,7 +12,7 @@ Every push is validated by a machine, and nothing secret leaves the machine.
 ```
 python3 tools/pz.py index && python3 tools/pz.py status --write
 git add -A && git commit -m "<what was done>"
-grep -rn "github_pat_\|ghp_" . --exclude-dir=.git --exclude-dir=.cache      # must print nothing
+grep -rnE "github_pat_[A-Za-z0-9]{10}|ghp_[A-Za-z0-9]{10}" . --exclude-dir=.git --exclude-dir=.cache      # must print nothing
 B64=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
 git -c http.extraheader="Authorization: Basic ${B64}" push origin main 2>&1 | sed "s/${B64}/***/g" | tail -1
 sleep 25

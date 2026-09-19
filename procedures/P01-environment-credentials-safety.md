@@ -13,7 +13,7 @@ Make the working environment predictable and make sure no secret ever lands in a
 5. **Encoding.** Do not cut text with `cut -c` (it splits multi-byte characters and the tool output becomes invalid UTF-8). Cap text inside Python instead.
 6. **Tools.** Python 3 standard library only; git; curl is not needed.
 7. **If a token appears in plain text in a conversation**, tell the user it should be rotated. Do not repeat it in summaries.
-8. **Secret scan before every push:** `grep -rn "github_pat_\|ghp_" . --exclude-dir=.git --exclude-dir=.cache` must print nothing.
+8. **Secret scan before every push:** `grep -rnE "github_pat_[A-Za-z0-9]{10}|ghp_[A-Za-z0-9]{10}" . --exclude-dir=.git --exclude-dir=.cache` must print nothing.
 9. **Pushing** without putting the token in a URL: `B64=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0); git -c http.extraheader="Authorization: Basic ${B64}" push origin main 2>&1 | sed "s/${B64}/***/g" | tail -1`.
 
 ## Outputs
