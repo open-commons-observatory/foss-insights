@@ -107,6 +107,31 @@
     "reported": "reporter said",
     "inferred": "my reading"
    }
+  },
+  "symptom": {
+   "multi": true,
+   "doc": "What the reporter saw (often derived from the text by keyword rules, so weak labels). Separate from the mechanism (layer, cause).",
+   "values": {
+    "stall-after-bytes": "transfer starts, then stalls or freezes (partial page, video loads endlessly, byte-count cutoff)",
+    "connection-reset": "connection reset or RST from the network",
+    "timeout-no-response": "timeouts, no answer, unreachable, no route",
+    "slow-throughput": "works but slow: speed drop, throttling, low goodput",
+    "no-effect": "the bypass has no visible effect or the strategy does not fire",
+    "breaks-other-sites": "collateral damage: unrelated sites, apps or games break",
+    "works-then-stops": "worked before, stopped after time, an update or a change (decay)",
+    "voice-call-fails": "voice or video calls fail (RTC connecting, no route, calls die)",
+    "wrong-probe-result": "the probing tool reports a wrong availability result",
+    "cert-or-tls-error": "certificate or TLS handshake errors",
+    "dns-wrong-answer": "hijacked, spoofed or wrong DNS answers",
+    "service-wont-start": "the daemon or service does not start or exits at once",
+    "install-fails": "installation or update fails",
+    "build-fails": "compilation or build fails",
+    "permission-denied": "permission or file-access errors",
+    "crash-or-hang": "crash, segfault, deadlock, reboot or system hang",
+    "unsupported-platform": "platform, kernel or feature not supported",
+    "config-ignored": "a list, filter or option seems to be ignored",
+    "av-or-signature-warning": "antivirus or signature warnings"
+   }
   }
  }
 }

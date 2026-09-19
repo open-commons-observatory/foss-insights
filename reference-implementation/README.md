@@ -6,9 +6,13 @@ Copy this directory to start an analysis repository (procedure P02). Everything 
 project.json                 owner, primary/secondary repo names, maintainer logins   <- edit first
 tools/pz.py                  the CLI (bootstrap, next, check, apply, validate, status, index, replay, ...)
 tools/threads.py             GitHub REST API thread fetcher and reader (list, fullfetch, readfull)
+tools/rulegen.py             batches from subject-pattern rules (no hand-typed hashes)
+tools/textrules.py           multi-label keyword tagging (weak labels such as symptom)
+tools/registry.py            problem registry: generate pages, index, by-symptom view and document views (import-docs is a one-time migration)
 taxonomy/facets.json         STARTER vocabulary: replace the domain facets (layer, cause, engine)
 taxonomy/classes.json        problem classes ({} at the start)
 .github/workflows/validate.yml   CI: validate records and batch syntax
+registry/source/             problems.json and links.json (empty; see P24)
 batches/  analysis/  brainstorms/  data/  LOG.md     empty, ready to use
 ```
 

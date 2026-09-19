@@ -28,6 +28,7 @@ Pick the closest preset, tick its procedures in your copy of [`templates/plan.md
 | P21 Rebuild and replay |  | ● | ● | ○ | ○ | ○ | ○ | ● |
 | P22 Honest coverage reporting | ● | ● | ● | ● | ● | ● | ● | ● |
 | P23 Autonomous rounds |  | ● | ● | ○ | ○ | ○ | ○ |  |
+| P24 Problem registry |  | ○ | ● | ○ | ○ | ● | ● |  |
 
 ## What each goal is for
 

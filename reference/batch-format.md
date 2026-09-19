@@ -9,7 +9,7 @@ ref[,ref...] | classes | tags | summary
 | column | rules |
 |---|---|
 | `ref` | one or more refs separated by commas: `i1836`, `c66fda2c`, `z2i75`, `z2c1a2b3c`. Records sharing a line receive identical tags and summary. |
-| `classes` | comma list of class ids from `taxonomy/classes.json`, or `-`. Classes are **added** (union with existing). An unknown class rejects the batch. |
+| `classes` | comma list of class ids from `taxonomy/classes.json`, or `-`. Classes are **added** (union with existing). A leading `~` (for example `~O1`) marks an **inferred** class, stored in `classes_inferred`. An unknown class rejects the batch. |
 | `tags` | space-separated `facet:value` tokens. A facet mentioned here **replaces** that facet's previous values. Values must exist in `facets.json`; a single-valued facet takes one value. Extra tokens: `status=read|analyzed`, `depth=title|thread|full|source`. |
 | `summary` | optional. Replaces the summary. If it starts with `+ ` it is **appended** (idempotent: an identical clause is not added twice). Empty: unchanged. |
 

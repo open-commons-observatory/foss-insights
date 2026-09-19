@@ -23,6 +23,9 @@ Inside a document each class is a heading `## X3 - short title`. The class id (a
 5. Write `00-method-and-coverage.md` last: depth counts (computed), truncation, what was not read, the list of claims that should be re-verified.
 6. When a record is corrected, correct every document that cites it (P18).
 
+## Once a registry exists (P24)
+The documents stop being hand-maintained: they become generated views of the registry, so evidence tags cannot rot and findings stay separate from proposals. Write them by hand only until P24, then migrate them once (`registry.py import-docs`).
+
 ## Outputs
 Documents, `classes.json`, records linked to classes.
 

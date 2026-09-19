@@ -50,7 +50,7 @@ for _d in list(REC.values()) + [rec_dir('z2', 'issue'), rec_dir('z2', 'commit'),
 STATUS_ORDER = ['stub', 'triaged', 'read', 'analyzed']
 DEPTH_ORDER = ['title', 'thread', 'full', 'source']
 FM_ORDER = ['kind', 'repo', 'pr', 'id', 'hash', 'title', 'url', 'date', 'state', 'files', 'adds', 'dels', 'refs',
-            'status', 'depth', 'tagged_by', 'classes', 'tags', 'cited_in']
+            'status', 'depth', 'tagged_by', 'classes', 'classes_inferred', 'tags', 'cited_in']
 
 
 # ---------------------------------------------------------------- io
@@ -256,36 +256,26 @@ def cmd_classes_build(a):
     print('classes: %d' % len(cls))
 
 def cmd_backfill_docs(a):
-    """Link records to class ids by where the analysis docs cite them; mark [R]-cited issues as read/thread."""
+    """Set `cited_in` on the records that the analysis documents cite (issue refs #N, z2#N and backticked commit hashes)
+    inside an entry section (## X1 - title). Classes are NOT touched here any more: they are data carried by batches."""
     n = 0
     for f in sorted(os.listdir(os.path.join(ROOT, 'analysis'))):
         if not f.endswith('.md'): continue
         txt = open(os.path.join(ROOT, 'analysis', f), encoding='utf-8').read()
-        parts = re.split(r'(?m)^(?=#{2,3} [A-Z]\d+ — )', txt)
-        for sec in parts:
-            m = re.match(r'#{2,3} ([A-Z]\d+) — ', sec)
-            if not m: continue
-            cid = m.group(1)
-            for num, tag in re.findall(r'#(\d{1,4})(?:\s*\((?:[^)]*)\))?\s*\[(R|T|R-lite|T\+[^\]]*|R/T|T/R-lite)\]', sec):
-                p = rec_path('issue', num)
-                if not os.path.exists(p): continue
-                fm, s, nt = parse(p)
-                ch = False
-                if cid not in fm['classes']: fm['classes'] = sorted(fm['classes'] + [cid]); ch = True
-                ref = 'analysis/' + f
-                if ref not in fm['cited_in']: fm['cited_in'] = sorted(fm['cited_in'] + [ref]); ch = True
-                if tag.startswith('R') and DEPTH_ORDER.index(fm['depth']) < 1: fm['depth'] = 'thread'; ch = True
-                if tag.startswith('R') and STATUS_ORDER.index(fm['status']) < 2: fm['status'] = 'read'; ch = True
-                if ch: dump(p, fm, s, nt); n += 1
-            for h in set(re.findall(r'`([0-9a-f]{7})`', sec)):
-                p = find_commit(h)
-                if not p: continue
-                fm, s, nt = parse(p); ch = False
-                if cid not in fm['classes']: fm['classes'] = sorted(fm['classes'] + [cid]); ch = True
-                ref = 'analysis/' + f
-                if ref not in fm['cited_in']: fm['cited_in'] = sorted(fm['cited_in'] + [ref]); ch = True
-                if STATUS_ORDER.index(fm['status']) < 2: fm['status'] = 'read'; ch = True  # subject read + placed in an analysis
-                if ch: dump(p, fm, s, nt); n += 1
+        ref = 'analysis/' + f
+        cited = set()
+        for sec in re.split(r'(?m)^(?=#{2,3} [A-Z]\d+ \u2014 )', txt):
+            if not re.match(r'#{2,3} [A-Z]\d+ \u2014 ', sec): continue
+            for z2, num in re.findall(r'(?<![\w`])(z2)?#(\d{1,4})\b', sec):
+                cited.add(('issue', 'z2' if z2 else 'z1', num))
+            for pre, h in re.findall(r'`(z2:)?([0-9a-f]{7})`', sec):
+                cited.add(('commit', 'z2' if pre else 'z1', h))
+        for kind, repo, key in cited:
+            p = rec_path('issue', key, repo=repo) if kind == 'issue' else find_commit(key, repo)
+            if not p or not os.path.exists(p): continue
+            fm, sm, nt = parse(p)
+            if ref not in fm['cited_in']:
+                fm['cited_in'] = sorted(fm['cited_in'] + [ref]); dump(p, fm, sm, nt); n += 1
     print('backfill: %d record updates' % n)
 
 def parse_batch(path, tax, classes):
@@ -309,8 +299,8 @@ def parse_batch(path, tax, classes):
                         tagtoks.append(t)
                 tags = split_tags(tagtoks, tax)
                 cids = [] if cl in ('-', '') else [c.strip() for c in cl.split(',')]
-                for c in cids:
-                    if c not in classes: raise ValueError('unknown class %r' % c)
+                for c in cids:   # a leading ~ marks an INFERRED class (stored in classes_inferred)
+                    if c.lstrip('~') not in classes: raise ValueError('unknown class %r' % c)
                 if extra.get('status', 'analyzed') not in STATUS_ORDER[2:]: raise ValueError('status must be read|analyzed')
                 if extra.get('depth', '') not in ('',) + tuple(DEPTH_ORDER): raise ValueError('bad depth')
                 ops.append((ref, p, cids, tags, extra, summ))
@@ -348,7 +338,11 @@ def cmd_apply(a):
     for ref, p, cids, tags, extra, summ in ops:  # apply only after whole batch validated
         fm, s, nt = parse(p)
         fm['tags'] = merge_tags(fm['tags'], tags)
-        if cids: fm['classes'] = sorted(set(fm['classes']) | set(cids))
+        human = [c for c in cids if not c.startswith('~')]; infer = [c[1:] for c in cids if c.startswith('~')]
+        if human: fm['classes'] = sorted(set(fm['classes']) | set(human))
+        inf = (set(fm.get('classes_inferred', [])) | set(infer)) - set(fm['classes'])
+        if inf: fm['classes_inferred'] = sorted(inf)
+        else: fm.pop('classes_inferred', None)
         st = extra.get('status', 'analyzed')
         if STATUS_ORDER.index(st) > STATUS_ORDER.index(fm['status']): fm['status'] = st
         dp = extra.get('depth') or ('thread' if fm['kind'] == 'issue' else 'title')
@@ -430,8 +424,9 @@ def cmd_validate(a):
         if fm['depth'] not in DEPTH_ORDER: errs.append('%s: bad depth' % rel)
         try: split_tags(fm['tags'], tax)
         except ValueError as e: errs.append('%s: %s' % (rel, e))
-        for c in fm['classes']:
+        for c in fm['classes'] + fm.get('classes_inferred', []):
             if c not in classes: errs.append('%s: unknown class %s' % (rel, c))
+        if set(fm.get('classes_inferred', [])) & set(fm['classes']): errs.append('%s: a class is both human and inferred' % rel)
         if fm['status'] == 'analyzed' and fm['tagged_by'] != 'manual': errs.append('%s: analyzed but not manually tagged' % rel)
         if fm['status'] == 'analyzed' and not s.strip('_(none yet)_ \n'): errs.append('%s: analyzed without summary' % rel)
     if errs: print('\n'.join(errs[:80])); print('%d error(s)' % len(errs)); sys.exit(1)

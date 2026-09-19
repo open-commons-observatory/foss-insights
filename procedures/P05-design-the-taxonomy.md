@@ -14,7 +14,8 @@ The vocabulary decides what the dataset can answer. It has to be small enough to
    - `constraint`: a rule a validator would have to enforce (illegal combination, phase order, capability required, parameter range, engine-only, scope limit). It feeds P14.
    - `auto`: could a tool detect and/or handle this automatically (detect+handle, detect-only, manual-only, n/a).
    - a **successor status** facet (`carried` / `changed` / `superseded` / `unverified` / `na`) if you will compare with another version (P13).
-6. **Problem classes** (`taxonomy/classes.json`): coarse buckets with ids like `M3` (letter = area, number = problem) linked to a heading in an analysis document. They are built *from* the narrative documents (P15): headings `## M3 - title` become classes (`pz.py classes-build`). You may start with none.
+5b. **A symptom facet** (what the reporter saw: stall after N bytes, connection reset, service will not start, ...) is worth adding early: mechanism facets (`layer`, `cause`) describe why, symptoms describe what a person can observe, and support triage needs the second. It can be filled by keyword rules (`textrules.py`); measure the precision (P24).
+6. **Problem classes** (`taxonomy/classes.json`): coarse buckets with ids like `M3` (letter = area, number = problem) linked to a heading in an analysis document. They are built *from* the narrative documents (P15): headings `## M3 - title` become classes (`pz.py classes-build`). You may start with none. Class links are **data carried by batches**, not something derived from documents (P24); machine-suggested classes go in a separate `classes_inferred` field.
 7. Run `python3 tools/pz.py validate` (all records must still validate after every vocabulary edit).
 
 ## Evolving the vocabulary (do this as you read)

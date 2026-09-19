@@ -57,6 +57,15 @@ Format: **symptom** - cause - fix - where it is handled.
 45. **A claim was narrower than my summary** - "keeps the last good list" was true only for files that cannot be opened (the code comment says why) - read the diff before summarising a code behaviour, and say "diff read" - P12.
 46. **Reading budget is finite; say what was cut** - display caps and skipped short replies were used throughout the second corpus - state them in the session entry - P22.
 
+## Registry run additions
+47. **Regenerating documents would have broken the rebuild** - the class links of 1,170 records existed only as a side effect of parsing the old documents (`backfill-docs`) - freeze them as data in a batch first, then change documents - P24.
+48. **The generator dropped a content block and only the rebuild diff caught it** (160 records lost their `cited_in`: the document views omitted the first-pass evidence notes) - a word-multiset comparison of each migrated entry plus a full rebuild proof after any structural change - P21, P24.
+49. **Weak labels start noisy** - the first symptom rules matched "hang" inside "change", "reboot" inside "after reboot", a passing mention of Discord voice: about 60-65% precision on a 28-record sample - sample before applying, tighten, write the estimate in the batch header - P24.
+50. **Leave-one-out accuracy was optimistic** (81-89%) because the training set was the problem-rich subset the documents had cited; a manual spot check on the second corpus gave about 70% - always spot-check on the population you will apply it to - P24.
+51. **Machine suggestions must never look like evidence** - inferred classes live in `classes_inferred` and are shown apart from hand-cited ones - P24.
+52. **An apostrophe in a single-quoted Python string broke a tool and the copy in the playbook** - a text edit made inside a script - run `py_compile` or the tool itself right after every edit, before copying or committing - P08.
+53. **A per-record `auto` facet stayed at 30 records** - "could this be caught automatically" is a property of a proposed detector, not of an issue - keep it on the registry entry (computed from its proposals), not on records - P24.
+
 ## Meta
 38. **"Complete" without a depth** - a count of analysed records hid that many were read shallowly - always give depth counts and limits together - P22.
 39. **Scope expanded silently** (a second corpus) - fine when asked for, but record the decision in the entry - P17, P20.

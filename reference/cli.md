@@ -31,3 +31,16 @@ Python 3 standard library only. Run from the repository root.
 | Command | What it does |
 |---|---|
 | `rulegen.py RULES.py --corpus z1\|z2 [--kind commit\|issue] --n N --out BATCH [--header TEXT]` | Takes the next N records that are not yet `analyzed`, matches each title against the ordered `R = [(regex, tags, summary), ...]` in RULES.py (first match wins) and writes a batch with the rules archived in its header. Prints `UNMATCHED` records. No ref is typed by hand. See P11. |
+
+## textrules.py (multi-label tagging from keyword rules)
+| Command | What it does |
+|---|---|
+| `textrules.py RULES.py --kind issue [--corpus z1\|z2\|all] [--fields title,summary] [--chars 240] --out BATCH [--report]` | RULES.py defines `R = [("facet:value", regex), ...]`; every matching rule adds its tag; records are grouped by identical tag sets into a batch whose header lists the rules. `--report` prints match counts and samples for a false-positive check. Weak labels: measure precision on a sample first (P24). |
+
+## registry.py (problem registry)
+| Command | What it does |
+|---|---|
+| `registry.py import-docs` | One-time migration of `analysis/NN-*.md` entries (`## X1 - title` with bullets) into `registry/source/problems.json`; proposals separated from findings; originals copied to `analysis/first-pass/`. |
+| `registry.py generate` | Writes `registry/<ID>.md`, `registry/README.md` (index, rules-to-problems, thin evidence), `registry/by-symptom.md` and regenerates the `analysis/NN-*.md` views from the source text plus the records. |
+
+`pz.py backfill-docs` now only sets `cited_in` from citations inside entry sections; classes are data carried by batches.

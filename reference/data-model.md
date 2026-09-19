@@ -19,7 +19,8 @@ refs: [1836]                  commits: issue numbers found as #N in the subject
 status: "analyzed"            stub | triaged | read | analyzed   (only moves up)
 depth: "full"                 title | thread | full | source     (only moves up)
 tagged_by: "manual"           none | heuristic | manual
-classes: ["D3", "M1"]         problem class ids (taxonomy/classes.json)
+classes: ["D3", "M1"]         problem class ids cited by hand (taxonomy/classes.json)
+classes_inferred: ["O1"]      suggested by a model (a ~ prefix in a batch); never mixed with classes
 tags: ["cause:byte-cutoff", "layer:probe", "conf:stated"]     facet:value, controlled
 cited_in: ["analysis/10-measurement-validity.md"]              filled by backfill-docs
 ---

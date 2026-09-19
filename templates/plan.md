@@ -26,6 +26,7 @@ Depth budget: <how deep for issues / commits; what stays at title depth>
 - [ ] P15 analysis documents
 - [ ] P16 indexes and statistics
 - [ ] P17 second corpus
+- [ ] P24 problem registry (classes as data, symptom facet, generated views)
 
 ## Assurance and operations
 - [ ] P18 QA pass (validate, overwrite check, retractions listed)
