@@ -59,6 +59,6 @@ The result is not a report. It is a **dataset** (one file per issue/commit, cont
 
 ## What the first run produced (scale reference)
 
-- Corpus 1: 830 issues and 974 commits; corpus 2: 115 issues/PRs and 1,330 commits.
-- About 60 controlled facet values per major facet family; 60 problem classes; a constraints catalogue of about 125 rules.
-- Effort: many long sessions; reading depth was the driver, not tooling. Plan for reading time first.
+- Corpus 1: 830 issues (770 read in full, 60 also checked against source) and 974 commits at subject level. Corpus 2: 115 issues/PRs (96 full, 19 source) and 1,330 commits (7 diffs read).
+- 60 problem classes; a constraints catalogue of about 125 rules with a status against the successor (carried 36, changed 23, superseded 8, not applicable 10, unverified 5).
+- Effort: many long sessions. Reading depth was the driver, not tooling: the first corpus took roughly 45 batches of 12-36 items; the second, the same structure at a fifth of the size, was done in a fraction of the time thanks to the API-only fetcher, `pz.py check` and `rulegen.py`.

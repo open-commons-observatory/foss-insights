@@ -26,3 +26,8 @@ Python 3 standard library only. Run from the repository root.
 
 ## Exit codes that matter
 `apply` and `check` return 1 on errors. Do not pipe them into `tail`/`head` if you need the status (use `set -o pipefail`).
+
+## rulegen.py (batches from subject-pattern rules)
+| Command | What it does |
+|---|---|
+| `rulegen.py RULES.py --corpus z1\|z2 [--kind commit\|issue] --n N --out BATCH [--header TEXT]` | Takes the next N records that are not yet `analyzed`, matches each title against the ordered `R = [(regex, tags, summary), ...]` in RULES.py (first match wins) and writes a batch with the rules archived in its header. Prints `UNMATCHED` records. No ref is typed by hand. See P11. |

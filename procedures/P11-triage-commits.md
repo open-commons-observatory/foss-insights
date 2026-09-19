@@ -13,6 +13,27 @@ Tag every commit from its subject, touched files and size, in date order, so cha
 5. Record uncertainty: if the subject is vague, tag what is observable (files, size) and use `conf:inferred` or leave `cause:unknown`. Do not upgrade a guess to a fact.
 6. Apply, validate, commit (P08).
 
+## Pattern-rule batches (the fast way, once the subjects are readable)
+When commit subjects are regular (a project that writes `component: what`), do not type hashes. Read a slice with `pz.py next --kind commit -n 120`, then write a **rules file** and let `tools/rulegen.py` build the batch:
+```python
+# rules_0073.py: first match wins, specific rules first
+R = [
+  (r'AI (inspired )?fix',        'ctype:fix layer:parser engine:main',        'Small fixes prompted by AI-assisted review (the subject names no specific change).'),
+  (r'timer|lua-gc',              'ctype:feature layer:parser engine:main',     'A timer API with fixes; the --lua-gc default was corrected from 60 ms to 60 s.'),
+  (r'pie experiment|dynamicbase','ctype:build layer:dist os:windows',          'Hardening of built binaries: PIE, ASLR, dynamic base.'),
+]
+```
+```
+python3 tools/rulegen.py rules_0073.py --corpus z2 --n 120 --out batches/0073-commits-jan-2026.tsv --header "commits 366..475, Jan 2026"
+python3 tools/pz.py check batches/0073-commits-jan-2026.tsv && python3 tools/pz.py apply batches/0073-commits-jan-2026.tsv && python3 tools/pz.py validate
+```
+- The tool prints every commit no rule matched (`UNMATCHED`): add a rule or write those lines by hand.
+- The rules are copied into the batch header as comments: the archive shows how each tag was assigned.
+- Run `check && apply && validate` **without pipes** (P08).
+- Order matters: put narrow rules (a specific fix you know from an issue) before broad ones (`optimize|cleanup`), and finish with a broad `maintenance` rule so nothing is silently left out.
+- Sample 10 records per rule set against their subjects. Rules assign tags from subjects only, so the batch stays `depth: title`.
+- In the first run, hand-typed hash lists produced a typo in nearly every second batch (`dc0fe0f` for `dc0fe70`, `cb85262a` for `cb85f6e`); generated batches produced none.
+
 ## Outputs
 Commit records at `analyzed`, `depth: title`.
 

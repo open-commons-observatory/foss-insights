@@ -49,6 +49,14 @@ Format: **symptom** - cause - fix - where it is handled.
 36. **Corrections left stale claims in documents** - a record was corrected but analysis documents still cited it - `grep -rn "#N" analysis/` on every correction - P18.
 37. **Derived files were stale at push** - `index`/`status --write` not rerun - run them before the closing commit - P16, P19.
 
+## Second run additions
+41. **Typos in hand-typed refs, again and again** (`dc0fe0f`, `fd1cfd1`, `d06e4f4d`, `cb85262a`) - copying 7-character hashes from a listing by eye - generate batches from subject-pattern rules (`rulegen.py`) instead of typing hashes - P11.
+42. **A rejected batch committed anyway, a second time** - `apply | tail` again masked the exit status although the lesson was already written down - never pipe `apply`; chain `check && apply && validate && commit` and read the result - P08.
+43. **A statistic in a document was wrong by mental arithmetic** ("1,214 of 1,330, 91%"; the data said 1,132, 85%) - I summed months in my head - compute every figure in a document with a script and write the document from its output - P22.
+44. **A method note misdescribed which batches used rules** - written from memory of the session - derive method statements from the batch headers and file names - P15, P22.
+45. **A claim was narrower than my summary** - "keeps the last good list" was true only for files that cannot be opened (the code comment says why) - read the diff before summarising a code behaviour, and say "diff read" - P12.
+46. **Reading budget is finite; say what was cut** - display caps and skipped short replies were used throughout the second corpus - state them in the session entry - P22.
+
 ## Meta
 38. **"Complete" without a depth** - a count of analysed records hid that many were read shallowly - always give depth counts and limits together - P22.
 39. **Scope expanded silently** (a second corpus) - fine when asked for, but record the decision in the entry - P17, P20.
