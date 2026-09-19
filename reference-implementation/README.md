@@ -8,6 +8,7 @@ tools/pz.py                  the CLI (bootstrap, next, check, apply, validate, s
 tools/threads.py             GitHub REST API thread fetcher and reader (list, fullfetch, readfull)
 tools/rulegen.py             batches from subject-pattern rules (no hand-typed hashes)
 tools/textrules.py           multi-label keyword tagging (weak labels such as symptom)
+tools/review.py              health review with an ATTENTION list (P25); `pz.py stamp FILE` fills computed status blocks
 tools/registry.py            problem registry: generate pages, index, by-symptom view and document views (import-docs is a one-time migration)
 taxonomy/facets.json         STARTER vocabulary: replace the domain facets (layer, cause, engine)
 taxonomy/classes.json        problem classes ({} at the start)

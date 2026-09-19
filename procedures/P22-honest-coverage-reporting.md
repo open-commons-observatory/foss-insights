@@ -21,6 +21,7 @@ Every report on the dataset states how much of the source was actually read and 
 - "Nothing was executed; statements about <target> come from its documentation and source at commit <hash>."
 
 ## Rules
+- Write derived numbers only through `pz.py stamp` (P16) or paste them from a command run at that moment.
 - Compute, do not recall: the first run once wrote "about 160 remain" from memory; the computed figure was 209.
 - Never write "complete" without the depth it applies to.
 - Put the limits statement next to the findings, not in an appendix.

@@ -29,6 +29,7 @@ Pick the closest preset, tick its procedures in your copy of [`templates/plan.md
 | P22 Honest coverage reporting | ● | ● | ● | ● | ● | ● | ● | ● |
 | P23 Autonomous rounds |  | ● | ● | ○ | ○ | ○ | ○ |  |
 | P24 Problem registry |  | ○ | ● | ○ | ○ | ● | ● |  |
+| P25 Review the finished dataset | ○ | ● | ● | ● | ○ | ● | ● | ○ |
 
 ## What each goal is for
 

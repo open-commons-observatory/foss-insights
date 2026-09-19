@@ -44,6 +44,7 @@ The result is not a report. It is a **dataset** (one file per issue/commit, cont
 | ☐ | [P22](procedures/P22-honest-coverage-reporting.md) | Honest coverage reporting | any | limits statement | S | never |
 | ☐ | [P23](procedures/P23-autonomous-rounds.md) | Working mode: autonomous rounds | P08 | efficient long sessions | S | short analyses |
 | ☐ | [P24](procedures/P24-build-a-problem-registry.md) | Build a problem registry | P08 (P15) | one page per problem, generated evidence, documents as views | M | the dataset or free-form documents suffice |
+| ☐ | [P25](procedures/P25-review-the-finished-dataset.md) | Review and stress-test the finished dataset | P08 | `indexes/review.md` with an ATTENTION list, ranked uses | S+M | throw-away exploration |
 
 ## Reference material
 

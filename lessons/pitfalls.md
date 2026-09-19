@@ -66,6 +66,13 @@ Format: **symptom** - cause - fix - where it is handled.
 52. **An apostrophe in a single-quoted Python string broke a tool and the copy in the playbook** - a text edit made inside a script - run `py_compile` or the tool itself right after every edit, before copying or committing - P08.
 53. **A per-record `auto` facet stayed at 30 records** - "could this be caught automatically" is a property of a proposed detector, not of an issue - keep it on the registry entry (computed from its proposals), not on records - P24.
 
+## Review run additions
+54. **A turn ended with only a backlog write, no answer in chat** - after filing the synthesis I stopped at the tool result and the owner had to ask again - finish every turn with the answer itself; the backlog entry is a record, not the reply - P20, P23.
+55. **Hand-typed counts in READMEs and documents went stale four times** (770/60 vs 766/64 issues, 59 vs 61 diffs, a stale "734 title-only" paragraph, a wrong monthly sum) - write derived numbers only with `pz.py stamp` or a script - P16, P22.
+56. **References in the rule catalogue were typed from memory** and five successor commits lacked their prefix - verify every `#N`, `z2#N` and hash programmatically before committing - P14.
+57. **75% of records share their summary opening with another record** - group-tagged batch lines are efficient but make summaries group-level evidence; say so, and write unique text where the item adds information - P08, P25.
+58. **The review found what a spot check would not** (documents citing a quarter of the records, all title-only tags stale, single-maintainer dependence, 29% unanswered threads) - run `review.py` when the main reading is done, not only at the very end - P25.
+
 ## Meta
 38. **"Complete" without a depth** - a count of analysed records hid that many were read shallowly - always give depth counts and limits together - P22.
 39. **Scope expanded silently** (a second corpus) - fine when asked for, but record the decision in the entry - P17, P20.

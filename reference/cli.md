@@ -22,6 +22,7 @@ Python 3 standard library only. Run from the repository root.
 | `pz.py index` | Regenerates `indexes/` (by-class, by-facet, worklist, constraints, STATUS, stats, stats-z2). |
 | `pz.py classes-build` | Builds `taxonomy/classes.json` from headings `## X3 - title` in `analysis/*.md`. |
 | `pz.py backfill-docs` | Links records to classes and `cited_in` from citations in `analysis/*.md`. |
+| `pz.py stamp FILE` | Replaces the block between `<!-- status:begin -->` and `<!-- status:end -->` with computed totals, analysed counts and depth counts (P16). |
 | `pz.py replay` | Re-applies every archived batch in order (rebuild proof, P21). |
 
 ## Exit codes that matter
@@ -44,3 +45,8 @@ Python 3 standard library only. Run from the repository root.
 | `registry.py generate` | Writes `registry/<ID>.md`, `registry/README.md` (index, rules-to-problems, thin evidence), `registry/by-symptom.md` and regenerates the `analysis/NN-*.md` views from the source text plus the records. |
 
 `pz.py backfill-docs` now only sets `cited_in` from citations inside entry sections; classes are data carried by batches.
+
+## review.py (dataset health review)
+| Command | What it does |
+|---|---|
+| `review.py [--out indexes/review.md] [--maintainers a,b] [--clone1 PATH] [--clone2 PATH] [--sparse-ok f1,f2]` | Computes coverage, facet population, class redundancy, citation coverage, time concentration, confidence/outcome mix, corrections, uncited constraints, duplicated summaries, maintainer behaviour (thread caches) and authorship concentration (clones); writes a report with an ATTENTION list. See P25. |

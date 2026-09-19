@@ -13,6 +13,14 @@ python3 tools/pz.py status --write     # also writes STATE.json (the snapshot th
 ```
 Generated files are never edited by hand and are safe to delete and regenerate. Run them at the end of a session, before the commit that closes it.
 
+## Derived numbers in prose: `stamp`
+Counts written by hand in a README or document go stale (in the first run four figures were corrected after the fact). Put a marker pair in the file and let the tool fill it from the records:
+```
+<!-- status:begin -->
+<!-- status:end -->
+```
+`python3 tools/pz.py stamp README.md` replaces the block with per-corpus totals, analysed counts and depth counts. Run it in the closing routine (P19). For a fuller health report use `review.py` (P25).
+
 ## Using the data (queries)
 Every record is a markdown file with JSON-valued frontmatter, so plain tools work:
 - Count by tag: `grep -l '"cause:byte-cutoff"' records/issues/*.md | wc -l`.
