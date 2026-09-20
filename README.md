@@ -17,6 +17,8 @@ GitHub API ──acquire──▶  Doltgres database  ──render──▶  Mar
                          └─ stored in this repo's hidden ref refs/dolt/data
 ```
 
+**Working on this repository as an AI agent (or with one)?** Read [AGENTS.md](AGENTS.md) first: this repository is its own operating manual, and it is read in full at the start of every session and updated as work goes on.
+
 ## Quick start
 
 ```bash
