@@ -30,7 +30,8 @@ if $A sql "INSERT INTO tag VALUES (1, 'kind', 'not-a-kind')" 2>/dev/null; then f
 
 # the file and the database must not silently disagree: `check` warns, `apply` refuses with a readable message
 grep -v "^      environment:" tests/fixtures/taxonomy.yaml > "$ATLAS_HOME/tax-drift.yaml"
-ATLAS_TAXONOMY="$ATLAS_HOME/tax-drift.yaml" $A check | grep -q "taxonomy drift: value cause:environment is in database only" || fail "drift not reported by check"
+DRIFT_OUT="$(ATLAS_TAXONOMY="$ATLAS_HOME/tax-drift.yaml" $A check || true)"   # capture first: `| grep -q` closes the pipe early and pipefail turns that into a failure
+grep -q "taxonomy drift: value cause:environment is in database only" <<<"$DRIFT_OUT" || fail "drift not reported by check"
 if ATLAS_TAXONOMY="$ATLAS_HOME/tax-drift.yaml" $A apply tests/fixtures/batch-ok.tsv 2> "$ATLAS_HOME/drift.err"; then fail "apply must refuse when taxonomy.yaml and the database disagree"; fi
 grep -q "disagree" "$ATLAS_HOME/drift.err" || fail "expected a readable drift message"
 $A check || true
