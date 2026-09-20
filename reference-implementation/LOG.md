@@ -1,1 +1,0 @@
-# Session log (append-only)
