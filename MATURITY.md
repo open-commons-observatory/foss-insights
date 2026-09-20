@@ -29,5 +29,9 @@ On 3,249 records (13 MB, one file per record): `pz.py status` 1.1 s, `validate` 
 - **No versioning, changelog or licence yet**; the repository is private.
 - **Single-source knowledge in the example dataset**: findings in the first project rest on one maintainer's statements plus code, untested by experiment (see its review).
 
+
+## Third project trial (input-remapper: ~1 370 issues and PRs; started 2026-09-20)
+New project shape: a Linux input-device remapping tool (Python + GTK + evdev), public tracker, one primary maintainer, English-language issues, active since 2020. Goal is contribution (G2 + G6 + G9 PR triage), not just analysis. Differences from the first two runs that this trial is designed to stress-test: (a) the `pr_potential` facet (new; designed at P00); (b) G9 goal preset (new; forks share the upstream issue tracker, so no z2 from the issue side); (c) single-maintainer dominance (~84% of commits) as a confidence-mix signal. This entry will be updated as the run progresses and findings are recorded.
+
 ## What would raise the level
 Run it on a third project with a different shape (many maintainers, or a non-GitHub tracker), by someone else if possible, and record every friction in `lessons/pitfalls.md`; run the deep-reading loop, the registry and the rule catalogue on the trial project; add a scale test at 20,000+ records; add versioning and a changelog.
