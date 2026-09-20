@@ -61,6 +61,14 @@ Working end to end and self-tested. Not yet supported: analysing commits (they a
 atlas (successor comparison), and a private-repository CI path. See [lenses](playbook/lenses.md). Built on Doltgres 1.x and
 Zensical 0.0.x, both young: versions are pinned.
 
+## Atlases built from this template
+
+| Atlas | Analyses | Site |
+|---|---|---|
+| [input-remapper-oco-atlas](https://github.com/open-commons-observatory/input-remapper-oco-atlas) | [sezanzeb/input-remapper](https://github.com/sezanzeb/input-remapper) | https://open-commons-observatory.github.io/input-remapper-oco-atlas/ |
+
+To take template fixes into an atlas, see [operate](playbook/09-operate.md#updating-an-atlas-from-the-template).
+
 ## Lineage
 
 Successor to `sync-dot-mesh/prior-art-playbook` (markdown records; preserved here as tag `v1-markdown-records`).

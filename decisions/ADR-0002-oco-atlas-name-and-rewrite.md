@@ -22,3 +22,10 @@ multiple corpora, private-repo CI. Stack decisions are in ADR-0001.
 ## Defects found while building (all fixed, all covered by `tests/run.sh`)
 A Jinja attribute lookup that returned a dict method instead of a column; test isolation on a shared server; server state written
 into the working tree. See [lessons](../playbook/lessons.md).
+
+## Outcome (2026-09-20)
+Template `oco-atlas` and first instance `input-remapper-oco-atlas` are live. The instance re-acquired the corpus from the API, replayed 16 v1 batches
+(192 analyses, 1,662 tags, distribution identical to numbers computed independently beforehand), and publishes a site from its database in CI, including a
+byte-identical-output check. Verified by running, not by inspection: clone and update of the database, atomic rejection of a bad batch, undo with
+`dolt_reset`, the documented update-from-template procedure, and drift detection between `taxonomy.yaml` and the database (`apply` now validates against the
+database vocabulary and refuses on drift). Every defect found on the way is in [lessons](../playbook/lessons.md) and covered by `tests/run.sh`.
