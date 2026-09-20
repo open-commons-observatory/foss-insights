@@ -25,3 +25,6 @@ tagging, reading and honesty still hold). These are new, found while rebuilding 
     cannot be a public template; import the history into a fresh repo instead.
 14. **Measure before believing a bug report.** A reported 45-80 s push to GitHub did not reproduce (5-8 s) on current versions.
 15. **Claims about compatibility need a build.** "Reads mkdocs.yml" was true for Zensical; it took one build to know.
+16. **GitHub contexts are scoped.** `runner.*` and `steps.*` do not exist in job-level `env:`; the workflow is rejected as a whole and shows up as a
+    failed run named after the file path, with no jobs. Set such values in a step (`echo "X=$RUNNER_TEMP/x" >> "$GITHUB_ENV"`). Local tests cannot
+    catch this; only a real run does.

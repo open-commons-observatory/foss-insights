@@ -19,9 +19,10 @@ jobs:
       present: ${{ steps.hasdb.outputs.present }}
     env:
       ATLAS_REPO: ${{ github.repository }}
-      ATLAS_HOME: ${{ runner.temp }}/atlas
     steps:
       - uses: actions/checkout@v7
+      - name: Keep the database outside the checkout (the runner context is only available in steps)
+        run: echo "ATLAS_HOME=$RUNNER_TEMP/atlas" >> "$GITHUB_ENV"
       - id: hasdb
         name: Is there a database in this repository yet?
         run: |
