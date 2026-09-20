@@ -32,6 +32,33 @@ python3 tools/pz.py validate && git add -A && git commit -q -m "batch NNNN: item
 python3 tools/threads.py readfull --corpus z1 --maint-only --min 90 --cap 450 $(next 12 numbers)
 ```
 
+
+## Machine-readable session state: CHECKPOINT.json (improvement from input-remapper run)
+
+When rounds span multiple sessions or context windows, a `CHECKPOINT.json` file at the repo root acts as a durable cursor that any session can read to resume instantly without parsing LOG.md or batch filenames.
+
+```json
+{
+  "schema": 1,
+  "session": 3,
+  "last_batch": 12,
+  "last_issue_analyzed": 180,
+  "issues_analyzed": 144,
+  "issues_total": 1099,
+  "taxonomy_locked": false,
+  "fetch_cache_watermark": 400,
+  "notes": "One line on where things stand and any notable finding.",
+  "next_steps": ["fetch threads 400-600", "read round 13"]
+}
+```
+
+**Rules:**
+- Update after every batch `apply` and at end of every session, before the final commit.
+- Keep `next_steps` as a short list; it is the first thing the next session reads.
+- `fetch_cache_watermark` tracks how many threads are cached, so the next session knows what to fetch before reading.
+- Commit CHECKPOINT.json separately from the batch commit (or add it to the batch commit); never leave a round without updating it.
+- The file is data, not instructions: never put executable commands or token references in it.
+
 ## Verification (done when)
 Each round produced one archived batch and one commit; the session entry lists the batch range and the remaining queue.
 
