@@ -1,6 +1,6 @@
 # ADR-0002: The name `oco-atlas`, and rewriting the playbook as a template
 
-Status: accepted (2026-09-20).
+Status: accepted (2026-09-20). **Superseded in part by [ADR-0003](ADR-0003-rename-to-foss-insights.md): the name is now `foss-insights` / `<project>-fi`.**
 
 ## Name
 "Prior art" is a patent-law term (everything public before a date that bears on novelty). It fits one use of the method (mining a

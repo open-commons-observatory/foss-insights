@@ -1,13 +1,13 @@
-# OCO Atlas
+# FOSS Insights
 
 **Turn a project's public history into an evidence-backed, versioned map of its problems, and a queue of fixes.**
 
-An *atlas* takes the issues, pull requests and commits of an open-source project, records what each one says against a controlled
+A *FOSS Insights* repository (an *FI*) takes the issues, pull requests and commits of an open-source project, records what each one says against a controlled
 vocabulary in a version-controlled Postgres-compatible database, groups them into recurring problems, and publishes the result as
 Markdown and a website. Every claim links to its source thread and says how it is known and how deeply it was read.
 
-This repository is the **template**. Each analysis is its own repository created from it and named `<project>-oco-atlas`,
-for example `input-remapper-oco-atlas`.
+This repository is the **template**. Each analysis is its own repository created from it and named `<project>-fi`,
+for example `input-remapper-fi`.
 
 ```
 GitHub API ──acquire──▶  Doltgres database  ──render──▶  Markdown + website
@@ -20,17 +20,17 @@ GitHub API ──acquire──▶  Doltgres database  ──render──▶  Mar
 ## Quick start
 
 ```bash
-# 1. Use this template -> name it <project>-oco-atlas, then edit atlas.yaml (repo, source.repo, title)
+# 1. Use this template -> name it <project>-fi, then edit fi.yaml (repo, source.repo, title)
 pip install -r requirements.txt
 tools/install-doltgres.sh
 export GITHUB_TOKEN=...                       # environment only, never committed
-python tools/atlas.py db init                 # server + schema + vocabulary
-python tools/atlas.py acquire                 # fetch the corpus
-python tools/atlas.py next                    # what to read first
-python tools/atlas.py read 1 2 3
-python tools/atlas.py apply batches/0001.tsv  # tag a batch; validated whole, written atomically
-python tools/atlas.py render                  # pages from SQL + templates
-python tools/atlas.py db push                 # the database into GitHub
+python tools/fi.py db init                 # server + schema + vocabulary
+python tools/fi.py acquire                 # fetch the corpus
+python tools/fi.py next                    # what to read first
+python tools/fi.py read 1 2 3
+python tools/fi.py apply batches/0001.tsv  # tag a batch; validated whole, written atomically
+python tools/fi.py render                  # pages from SQL + templates
+python tools/fi.py db push                 # the database into GitHub
 ```
 
 Self-test of the whole pipeline on a small fixture: `bash tests/run.sh` (CI runs it on every push).
@@ -40,14 +40,14 @@ Self-test of the whole pipeline on a small fixture: `bash tests/run.sh` (CI runs
 | Path | What |
 |---|---|
 | [`playbook/`](playbook/README.md) | the method: nine phases, principles, lenses, lessons |
-| `atlas.yaml`, `taxonomy.yaml` | your project's configuration and controlled vocabulary |
+| `fi.yaml`, `taxonomy.yaml` | your project's configuration and controlled vocabulary |
 | `db/schema.sql` | the database schema (Postgres dialect) |
-| `tools/atlas.py`, `tools/render.py` | the command line tool and the page generator |
+| `tools/fi.py`, `tools/render.py` | the command line tool and the page generator |
 | `docs/pages.yaml`, `docs/queries/`, `docs/templates/` | what to render: SQL feeds Jinja templates |
-| `batches/` | applied batch files: the readable audit log (in atlas repos) |
-| `data/`, `docs/generated/` | CSV export and rendered pages, regenerated from the database (in atlas repos) |
+| `batches/` | applied batch files: the readable audit log (in FI repos) |
+| `data/`, `docs/generated/` | CSV export and rendered pages, regenerated from the database (in FI repos) |
 | [`decisions/`](decisions/) | decision records: options considered, evidence, why |
-| `.github/workflows/` | `self-test.yml` (this template) and `docs.yml` (publishes an atlas) |
+| `.github/workflows/` | `self-test.yml` (this template) and `docs.yml` (publishes an FI repository) |
 
 ## Why a database
 
@@ -58,16 +58,16 @@ diffs at the row level. [ADR-0001](decisions/ADR-0001-data-store-and-tooling.md)
 ## Status and limits
 
 Working end to end and self-tested. Not yet supported: analysing commits (they are acquired and stored), multiple corpora in one
-atlas (successor comparison), and a private-repository CI path. See [lenses](playbook/lenses.md). Built on Doltgres 1.x and
+fi (successor comparison), and a private-repository CI path. See [lenses](playbook/lenses.md). Built on Doltgres 1.x and
 Zensical 0.0.x, both young: versions are pinned.
 
-## Atlases built from this template
+## FI repositories built from this template
 
-| Atlas | Analyses | Site |
+| FI repository | Analyses | Site |
 |---|---|---|
-| [input-remapper-oco-atlas](https://github.com/open-commons-observatory/input-remapper-oco-atlas) | [sezanzeb/input-remapper](https://github.com/sezanzeb/input-remapper) | https://open-commons-observatory.github.io/input-remapper-oco-atlas/ |
+| [input-remapper-fi](https://github.com/open-commons-observatory/input-remapper-fi) | [sezanzeb/input-remapper](https://github.com/sezanzeb/input-remapper) | https://open-commons-observatory.github.io/input-remapper-fi/ |
 
-To take template fixes into an atlas, see [operate](playbook/09-operate.md#updating-an-atlas-from-the-template).
+To take template fixes into an FI repository, see [operate](playbook/09-operate.md#updating-an-fi-repository-from-the-template).
 
 ## Lineage
 
