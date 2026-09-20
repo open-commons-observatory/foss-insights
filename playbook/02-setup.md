@@ -22,3 +22,6 @@ Where things live:
 
 Servers do not persist in every environment (for example some sandboxes drop background processes between commands).
 `atlas db up` is idempotent: call it at the start of every session.
+
+`tests/run.sh` and the self-test workflow check the tooling with their own fixture vocabulary (`tests/fixtures/`), so keep them in
+your atlas. If you customise the page templates, update the page names the test looks for.

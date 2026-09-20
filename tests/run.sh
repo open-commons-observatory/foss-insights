@@ -5,6 +5,8 @@ cd "$(dirname "$0")/.."
 export ATLAS_HOME="${ATLAS_HOME:-$(mktemp -d)}"
 mkdir -p "$ATLAS_HOME"
 export ATLAS_DATABASE="atlas_test_$$_$RANDOM"   # private database: safe on a server that already holds data
+# The fixture carries its own vocabulary, so this test keeps working in atlases whose taxonomy.yaml differs.
+export ATLAS_TAXONOMY="tests/fixtures/taxonomy.yaml"
 A="python tools/atlas.py"
 fail() { echo "TEST FAILED: $*" >&2; exit 1; }
 count() { $A sql "SELECT count(*) AS n FROM analysis" | sed -n 3p | tr -d ' '; }

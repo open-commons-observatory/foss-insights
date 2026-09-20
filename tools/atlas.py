@@ -101,7 +101,7 @@ def run_sql_file(conn, path):
 
 
 def taxonomy():
-    t = yaml.safe_load((ROOT / cfg().get("taxonomy", "taxonomy.yaml")).read_text())["facets"]
+    t = yaml.safe_load((ROOT / (os.environ.get("ATLAS_TAXONOMY") or cfg().get("taxonomy", "taxonomy.yaml"))).read_text())["facets"]
     for name, f in t.items():
         for v in f["values"]:
             if not isinstance(v, str):
