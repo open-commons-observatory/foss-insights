@@ -2,34 +2,34 @@
 
 Pick the closest preset, tick its procedures in your copy of [`templates/plan.md`](templates/plan.md), then adjust. `●` = do, `○` = optional, blank = skip.
 
-| Procedure | G1 Quick landscape | G2 Exhaustive dataset | G3 Rule catalogue | G4 Successor comparison | G5 Design history | G6 Support/docs burden | G7 Detector / oracle input | G8 Refresh an existing analysis |
-|---|---|---|---|---|---|---|---|---|
-| P00 Goals and scope | ● | ● | ● | ● | ● | ● | ● | ● |
-| P01 Environment, credentials | ● | ● | ● | ● | ● | ● | ● | ● |
-| P02 Scaffold | ● | ● | ● | ● | ● | ● | ● |  |
-| P03 Issues and PRs | ● | ● | ● | ● | ○ | ● | ● | ● |
-| P04 Commits | ○ | ● | ● | ● | ● |  | ○ | ● |
-| P05 Taxonomy | ○ | ● | ● | ● | ● | ● | ● |  |
-| P06 Bootstrap | ● | ● | ● | ● | ● | ● | ● | ● |
-| P07 Rule-tag commits | ○ | ● | ● | ● | ● |  | ○ | ● |
-| P08 Atomic batch loop | ○ | ● | ● | ● | ● | ● | ● | ● |
-| P09 Read issues at depth | ○ | ● | ● | ● | ○ | ● | ● | ● |
-| P10 Audit hidden text |  | ● | ● | ○ |  | ○ | ● |  |
-| P11 Triage commits |  | ● | ● | ● | ● |  | ○ | ● |
-| P12 Read commit diffs |  | ○ | ● | ○ | ● |  | ○ |  |
-| P13 Verify against another version |  | ○ | ● | ● | ○ |  | ● |  |
-| P14 Constraints catalogue |  | ○ | ● | ○ |  |  | ○ |  |
-| P15 Analysis documents |  | ○ | ● | ● | ● | ○ | ● | ○ |
-| P16 Indexes and statistics | ● | ● | ● | ● | ● | ● | ● | ● |
-| P17 Second corpus |  | ○ |  | ● | ○ |  |  |  |
-| P18 QA and corrections | ○ | ● | ● | ● | ● | ● | ● | ● |
-| P19 CI and publishing | ○ | ● | ● | ● | ● | ● | ● | ● |
-| P20 Backlog and log | ○ | ● | ● | ● | ● | ● | ● | ● |
-| P21 Rebuild and replay |  | ● | ● | ○ | ○ | ○ | ○ | ● |
-| P22 Honest coverage reporting | ● | ● | ● | ● | ● | ● | ● | ● |
-| P23 Autonomous rounds |  | ● | ● | ○ | ○ | ○ | ○ |  |
-| P24 Problem registry |  | ○ | ● | ○ | ○ | ● | ● |  |
-| P25 Review the finished dataset | ○ | ● | ● | ● | ○ | ● | ● | ○ |
+| Procedure | G1 Quick landscape | G2 Exhaustive dataset | G3 Rule catalogue | G4 Successor comparison | G5 Design history | G6 Support/docs burden | G7 Detector / oracle input | G8 Refresh an existing analysis | G9 PR triage |
+|---|---|---|---|---|---|---|---|------|
+| P00 Goals and scope | ● | ● | ● | ● | ● | ● | ● | ●  ● |
+| P01 Environment, credentials | ● | ● | ● | ● | ● | ● | ● | ●  ● |
+| P02 Scaffold | ● | ● | ● | ● | ● | ● | ● |   ● |
+| P03 Issues and PRs | ● | ● | ● | ● | ○ | ● | ● | ●  ● |
+| P04 Commits | ○ | ● | ● | ● | ● |  | ○ | ●  ○ |
+| P05 Taxonomy | ○ | ● | ● | ● | ● | ● | ● |   ● |
+| P06 Bootstrap | ● | ● | ● | ● | ● | ● | ● | ●  ● |
+| P07 Rule-tag commits | ○ | ● | ● | ● | ● |  | ○ | ●   |
+| P08 Atomic batch loop | ○ | ● | ● | ● | ● | ● | ● | ●  ● |
+| P09 Read issues at depth | ○ | ● | ● | ● | ○ | ● | ● | ●  ● |
+| P10 Audit hidden text |  | ● | ● | ○ |  | ○ | ● |   ○ |
+| P11 Triage commits |  | ● | ● | ● | ● |  | ○ | ●   |
+| P12 Read commit diffs |  | ○ | ● | ○ | ● |  | ○ |    |
+| P13 Verify against another version |  | ○ | ● | ● | ○ |  | ● |    |
+| P14 Constraints catalogue |  | ○ | ● | ○ |  |  | ○ |    |
+| P15 Analysis documents |  | ○ | ● | ● | ● | ○ | ● | ○  ○ |
+| P16 Indexes and statistics | ● | ● | ● | ● | ● | ● | ● | ●  ● |
+| P17 Second corpus |  | ○ |  | ● | ○ |  |  |    |
+| P18 QA and corrections | ○ | ● | ● | ● | ● | ● | ● | ●  ● |
+| P19 CI and publishing | ○ | ● | ● | ● | ● | ● | ● | ●  ● |
+| P20 Backlog and log | ○ | ● | ● | ● | ● | ● | ● | ●  ● |
+| P21 Rebuild and replay |  | ● | ● | ○ | ○ | ○ | ○ | ●  ○ |
+| P22 Honest coverage reporting | ● | ● | ● | ● | ● | ● | ● | ●  ● |
+| P23 Autonomous rounds |  | ● | ● | ○ | ○ | ○ | ○ |   ● |
+| P24 Problem registry |  | ○ | ● | ○ | ○ | ● | ● |   ● |
+| P25 Review the finished dataset | ○ | ● | ● | ● | ○ | ● | ● | ○  ● |
 
 ## What each goal is for
 
@@ -41,6 +41,8 @@ Pick the closest preset, tick its procedures in your copy of [`templates/plan.md
 - **G6 Support/docs burden.** Counts by kind, outcome, cause, per year; find docs gaps and repeated questions. Needs the taxonomy's `doc-gap` and `spam` values.
 - **G7 Detector / oracle input.** For projects that measure or classify something: how failures are detected, where measurement misleads. Read for measurement validity, false positives and false negatives.
 - **G8 Refresh.** New activity since the last run: re-list, bootstrap (idempotent), read only new items, regenerate indexes, add a session entry.
+
+- **G9 PR triage.** G2 plus the `pr_potential` facet and a PR triage table as the deliverable. Each issue gets an actionability tag (code-fix, docs-fix, needs-design, upstream-dep, close-duplicate, wontfix). The output is a prioritised PR queue. Use when the end goal is contribution to the project, not just understanding it. Requires `conf:inferred` on `pr_potential`; upgrade to `conf:stated` when the maintainer confirms or rejects the approach.
 
 ## Combining goals
 
