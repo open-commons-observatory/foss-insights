@@ -61,6 +61,10 @@ The result is not a report. It is a **dataset** (one file per issue/commit, cont
 | [`templates/`](templates/) | Plan checklist, session entry, batch example, record example |
 | [`reference-implementation/`](reference-implementation/) | Working CLI (`pz.py`), API thread tool (`threads.py`), starter taxonomy, CI |
 
+## What the third run is doing (started 2026-09-20)
+
+`input-remapper` (sezanzeb/input-remapper): ~1 370 issues/PRs, ~320 commits, goal G2+G6+G9 (PR triage). New: the `pr_potential` facet and G9 preset; fork as contribution vehicle, not a second corpus. Session log in the analysis repository: `open-commons-observatory/input-remapper-prior-art`.
+
 ## What the first run produced (scale reference)
 
 - Corpus 1: 830 issues (766 read in full, 64 also checked against source) and 974 commits at subject level. Corpus 2: 115 issues/PRs (96 full, 19 source) and 1,330 commits. Diffs were read for 82 constraint-related commits (61 in the first corpus, 21 in the second).
