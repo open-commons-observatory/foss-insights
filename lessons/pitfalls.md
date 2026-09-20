@@ -84,3 +84,11 @@ Format: **symptom** - cause - fix - where it is handled.
 38. **"Complete" without a depth** - a count of analysed records hid that many were read shallowly - always give depth counts and limits together - P22.
 39. **Scope expanded silently** (a second corpus) - fine when asked for, but record the decision in the entry - P17, P20.
 40. **The playbook itself:** if a procedure here disagrees with what works, fix the playbook in the same session and add the lesson here.
+
+## Input-remapper / PR triage additions
+
+64. **A contribution goal needs its own actionability facet from the start** — the owner wanted PRs from the analysis, not just a dataset; the `pr_potential` facet had to be designed before the reading loop, not retrofitted mid-run. A retrofitted facet means re-reading every record that has already been tagged. Decide at P00 whether the goal is understanding or contribution; if contribution, add a `pr_potential`-style facet (values: code-fix, docs-fix, needs-design, upstream-dep, close-duplicate, wontfix, unknown) to the taxonomy before P06 — P05, P09, P24.
+
+65. **Forks share the upstream issue tracker** — a GitHub fork does not create its own issue list. The fork is the contribution vehicle (where PRs land), not a second corpus. Do not treat it as z2 unless its commit history diverges meaningfully and you need G4 comparison — P00, P02, P17.
+
+66. **A single-maintainer project's stated findings are single-source** — when one person wrote 80%+ of the commits and answered most issues, every `conf:stated` tag rests on one expert's view. Flag this in the ATTENTION section of `review.py` and in the P22 limits statement; it is not a reason to avoid using the data, but every claim should say who said it — P22, P25.
