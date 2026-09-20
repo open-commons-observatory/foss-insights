@@ -41,7 +41,7 @@ Self-test of the whole pipeline on a small fixture: `bash tests/run.sh` (CI runs
 |---|---|
 | [`playbook/`](playbook/README.md) | the method: nine phases, principles, lenses, lessons |
 | `fi.yaml`, `taxonomy.yaml` | your project's configuration and controlled vocabulary |
-| `db/schema.sql` | the database schema (Postgres dialect) |
+| `db/migrations/` | the database schema as numbered migrations (Postgres dialect); `fi db init` applies the pending ones |
 | `tools/fi.py`, `tools/render.py` | the command line tool and the page generator |
 | `docs/pages.yaml`, `docs/queries/`, `docs/templates/` | what to render: SQL feeds Jinja templates |
 | `batches/` | applied batch files: the readable audit log (in FI repos) |
