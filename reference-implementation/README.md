@@ -27,6 +27,9 @@ python3 tools/pz.py bootstrap --corpus z1 --issues data/issues-list.json --clone
 python3 tools/pz.py validate && python3 tools/pz.py status
 ```
 
+## Tests
+`python tests/test_reference.py` (offline, no token, 16 checks; mutation-tested). See ../MATURITY.md for what is and is not covered.
+
 ## Tested
 The skeleton was smoke-tested end to end against a live repository: list, fullfetch, readfull, bootstrap of both corpora, a batch with a deliberately bad ref (rejected atomically), a valid batch, validate, index, status.
 

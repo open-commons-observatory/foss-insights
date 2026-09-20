@@ -20,6 +20,9 @@ Create one stub record per issue/PR/commit so that every item exists as a file a
 ## Verification (done when)
 `status` shows `total` equal to the API list count (issues + PRs) and to the commit count; `validate` prints ok.
 
+## PR-heavy trackers
+In a project where most records are pull requests (69% in the trial), the outcome is in the record's `state` (`pr-merged`, `pr-closed`, `pr-open`, `closed/completed`, ...). Use `rulegen.py --with-state` so rules can match `[pr-merged]`, and keep `kind` for what the PR proposes (feature, fix, docs), not for whether it merged.
+
 ## Pitfalls
 - Bootstrap is idempotent and never touches existing records. That makes "refresh" (goal G8) cheap: list again, bootstrap again, read only what is new.
 - Heuristic tags are a head start, not knowledge: a record is only `analyzed` after a manual batch.

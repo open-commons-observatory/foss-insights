@@ -7,6 +7,7 @@ RULES.py defines   R = [("facet:value", r"regex"), ...]   (every rule that match
 Only records with at least one match get a line; lines are grouped by identical tag sets. The rules are copied into the
 batch header. These are WEAK labels from text: use them for facets that describe what a reader would see (symptom),
 not for judgements. --report prints match counts per rule and samples for a quick false-positive check.
+Lines carry depth=<--depth> (default title) so weak text labels never raise a record's depth by default.
 Apply with:  pz.py check BATCH && pz.py apply BATCH && pz.py validate   (no pipes).
 """
 import argparse, collections, os, re, runpy, sys
@@ -16,7 +17,7 @@ import pz  # noqa: E402
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('rules'); ap.add_argument('--kind', default='issue', choices=['issue', 'commit']); ap.add_argument('--corpus', default='all', choices=['z1', 'z2', 'all'])
-    ap.add_argument('--fields', default='title,summary'); ap.add_argument('--chars', type=int, default=400); ap.add_argument('--out', required=True); ap.add_argument('--report', action='store_true')
+    ap.add_argument('--fields', default='title,summary'); ap.add_argument('--chars', type=int, default=400); ap.add_argument('--out', required=True); ap.add_argument('--depth', default='title', choices=['title', 'thread', 'full', 'source']); ap.add_argument('--report', action='store_true')
     a = ap.parse_args()
     R = [(t, re.compile(rx, re.I)) for t, rx in runpy.run_path(a.rules)['R']]
     fields = a.fields.split(','); groups = collections.defaultdict(list); per = collections.Counter(); samples = collections.defaultdict(list); n = 0
@@ -36,7 +37,7 @@ def main():
     L = ['# multi-label keyword tagging (weak labels from text); fields=%s, first %d characters of the summary' % (a.fields, a.chars)]
     L += ['# rule: %s <- /%s/' % (t, rx.pattern) for t, rx in R]
     for tags, refs in sorted(groups.items()):
-        for i in range(0, len(refs), 12): L.append(','.join(refs[i:i + 12]) + ' | - | ' + ' '.join(tags) + ' | ')
+        for i in range(0, len(refs), 12): L.append(','.join(refs[i:i + 12]) + ' | - | ' + ' '.join(tags) + ' depth=' + a.depth + ' | ')
     open(a.out, 'w', encoding='utf-8').write('\n'.join(L) + '\n')
     print('records with at least one tag: %d -> %s' % (n, a.out))
     if a.report:

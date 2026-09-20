@@ -73,6 +73,13 @@ Format: **symptom** - cause - fix - where it is handled.
 57. **75% of records share their summary opening with another record** - group-tagged batch lines are efficient but make summaries group-level evidence; say so, and write unique text where the item adds information - P08, P25.
 58. **The review found what a spot check would not** (documents citing a quarter of the records, all title-only tags stale, single-maintainer dependence, 29% unanswered threads) - run `review.py` when the main reading is done, not only at the very end - P25.
 
+## Second-project trial additions
+59. **Generic tools overstated the depth** - `apply` defaults issues to depth `thread`, so title-only rule batches looked like brief reads; invisible in the first project where depth was set by hand - rule and text tools now emit an explicit `depth=` (default `title`) - P08, P11.
+60. **The review flagged shares computed on three records** - "67% unresolved" from three tagged issues - reports need a minimum sample size before flagging (30) - P25.
+61. **PR-heavy trackers need the merge state** - 69% of the trial project's records were PRs whose outcome lives in `state`, not in the title - `rulegen --with-state` matches rules against the title plus `[state]` - P06, P09.
+62. **A first-time-green test suite proves little** - mutation-test it: break two behaviours on purpose in a scratch copy and confirm the tests fail - P19.
+63. **Readiness claims need evidence** - the playbook was described as finished before any second project had run it - state maturity from what was tested (`MATURITY.md`), and update it when that changes - P22.
+
 ## Meta
 38. **"Complete" without a depth** - a count of analysed records hid that many were read shallowly - always give depth counts and limits together - P22.
 39. **Scope expanded silently** (a second corpus) - fine when asked for, but record the decision in the entry - P17, P20.

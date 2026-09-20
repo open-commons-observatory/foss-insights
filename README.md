@@ -4,6 +4,8 @@ How to build an **exhaustive, normalised, tagged prior-art analysis** of an open
 
 The result is not a report. It is a **dataset** (one file per issue/commit, controlled vocabulary, derived indexes and statistics) from which many different reports can be produced. That is why the playbook is split into small procedures you opt in and out of according to the goal.
 
+> **Maturity:** a strong first draft, proven on one large project and smoke-tested on a second, with an offline test suite; **not battle-tested**. Read [`MATURITY.md`](MATURITY.md) for exactly what is and is not tested before relying on it.
+
 ## How to use this playbook
 
 1. Read [`principles.md`](principles.md) (5 minutes). They are the rules that kept the first run honest.

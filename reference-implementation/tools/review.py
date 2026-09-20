@@ -12,6 +12,7 @@ import argparse, collections, datetime, json, os, re, statistics, subprocess, sy
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pz  # noqa: E402
 
+MIN_N = 30   # do not flag shares computed on fewer tagged records than this (small-sample noise)
 CORR = re.compile(r'CORRECTION|Retracted|upgrades an earlier inference|Correction of an earlier|corrects an earlier', re.I)
 
 
@@ -45,7 +46,7 @@ def main():
         if not rs: continue
         fc = collections.Counter(f for x in rs for f in {t.split(':')[0] for t in x[2]['tags']})
         L.append('- **%s** (%d records): ' % (k, len(rs)) + ', '.join('%s %s' % (f, pct(v, len(rs))) for f, v in fc.most_common()))
-        for f, v in fc.items():
+        for f, v in (fc.items() if len(rs) >= MIN_N else []):
             if v / len(rs) < 0.15 and f not in set(a.sparse_ok.split(',')): att.append('%s facet `%s` is on only %s of %s records' % (k, f, pct(v, len(rs)), k))
     # 3 classes
     L += ['', '## Problem classes', '']
@@ -63,7 +64,7 @@ def main():
     if tot:
         pur = sum(c.most_common(1)[0][1] for c in lay.values()) / tot
         L += ['', 'Class letter predicted by the primary `layer` tag alone: **%d%%** (%d classed issues).' % (round(100 * pur), tot)]
-        if pur > 0.8: att.append('class letters are %d%% predictable from `layer` (the top level of the class scheme duplicates a facet)' % round(100 * pur))
+        if pur > 0.8 and tot >= MIN_N: att.append('class letters are %d%% predictable from `layer` (the top level of the class scheme duplicates a facet)' % round(100 * pur))
     # thin classes
     per = collections.Counter(c for k, repo, fm, s in R for c in fm['classes'])
     cls = json.load(open(pz.CLS, encoding='utf-8')) if os.path.exists(pz.CLS) else {}
@@ -91,9 +92,9 @@ def main():
     if conf: L.append('- conf: ' + ', '.join('%s %s' % (t[5:], pct(v, sum(conf.values()))) for t, v in conf.most_common()))
     if out: L.append('- outcome: ' + ', '.join('%s %s' % (t[8:], pct(v, sum(out.values()))) for t, v in out.most_common(6)))
     st = conf.get('conf:stated', 0)
-    if conf and st / sum(conf.values()) > 0.7: att.append('%s of tagged issues rest on a maintainer statement (`conf:stated`): single-source knowledge, not tested' % pct(st, sum(conf.values())))
+    if sum(conf.values()) >= MIN_N and st / sum(conf.values()) > 0.7: att.append('%s of tagged issues rest on a maintainer statement (`conf:stated`): single-source knowledge, not tested' % pct(st, sum(conf.values())))
     unk = out.get('outcome:unknown', 0)
-    if out and unk / sum(out.values()) > 0.2: att.append('%s of issues have no visible resolution (`outcome:unknown`)' % pct(unk, sum(out.values())))
+    if sum(out.values()) >= MIN_N and unk / sum(out.values()) > 0.2: att.append('%s of issues have no visible resolution (`outcome:unknown`)' % pct(unk, sum(out.values())))
     # 7 corrections, constraints, duplicate summaries
     corr = [x for x in R if CORR.search(x[3])]
     L += ['', '## Corrections and constraints', '', '- records whose summary records a correction, retraction or upgrade: **%d**' % len(corr)]

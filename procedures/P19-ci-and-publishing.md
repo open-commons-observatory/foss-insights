@@ -8,6 +8,9 @@ Every push is validated by a machine, and nothing secret leaves the machine.
 ## CI (already in the skeleton)
 `.github/workflows/validate.yml` runs on push and pull request: `python tools/pz.py validate` (every record against the taxonomy) and a syntax/vocabulary check of every archived batch. A broken vocabulary edit therefore fails CI instead of poisoning replay.
 
+## Tests
+The reference implementation ships an offline test suite (`reference-implementation/tests/test_reference.py`, no token) that CI runs; copy it into your analysis repo and extend it when you change the tools. When you add a test, break the behaviour on purpose once to see it fail.
+
 ## Publishing sequence (end of a round or session)
 ```
 python3 tools/pz.py index && python3 tools/pz.py status --write
